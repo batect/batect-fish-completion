@@ -1,0 +1,28 @@
+name: Pipeline
+
+on: [push]
+
+jobs:
+  build:
+    name: "Lint and Test"
+    runs-on: ubuntu-latest
+    env:
+      TERM: xterm-256color
+      BATECT_CACHE_TYPE: directory
+      BATECT_ENABLE_TELEMETRY: true
+      DOCKER_BUILDKIT: 1
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Cache batect
+        uses: actions/cache@v1
+        with:
+          path: ~/.batect/cache
+          key: batect-${{ hashFiles('batect') }}
+
+      - name: Check formatting
+        run: ./batect check-format
+
+      - name: Lint code
+        run: ./batect lint
