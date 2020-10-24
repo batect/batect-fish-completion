@@ -26,3 +26,6 @@ jobs:
 
       - name: Lint code
         run: ./batect lint
+
+      - name: Test
+        run: ./batect test

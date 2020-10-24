@@ -23,6 +23,16 @@ containers:
         options: ro
     working_directory: /code
 
+  test-env:
+    build_directory: .batect/test-env
+    volumes:
+      - local: completions/batect.fish
+        container: /usr/local/share/fish/vendor_completions.d/batect.fish
+        options: ro
+      - local: tests
+        container: /tests
+        options: ro
+
 tasks:
   check-format:
     description: Run all formatting check tasks.
@@ -56,6 +66,14 @@ tasks:
     group: Linting tasks
     prerequisites:
       - lint:*
+
+  test:
+    description: Run the tests.
+    group: Testing tasks
+    run:
+      container: test-env
+      command: ./tests.py
+      working_directory: /tests
 
 include:
   - type: git
