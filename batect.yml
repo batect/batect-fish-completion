@@ -33,6 +33,14 @@ containers:
         container: /tests
         options: ro
 
+  release-env:
+    build_directory: .batect/release-env
+    volumes:
+      - local: .
+        container: /code
+        options: ro
+    working_directory: /code
+
 tasks:
   check-format:
     description: Run all formatting check tasks.
@@ -82,6 +90,20 @@ tasks:
       container: test-env
       command: fish
       working_directory: /tests
+
+  validate-release:
+    description: Validate that the current state of the repository is suitable for releasing.
+    group: Release tasks
+    run:
+      container: release-env
+      command: ./scripts/validate_version.sh
+
+  check-release-env:
+    description: Test that the release environment still builds (it's only used whenever we release, but finding out that packages are outdated at that point is too late).
+    group: Release tasks
+    run:
+      container: release-env
+      command: echo OK!
 
 include:
   - type: git
