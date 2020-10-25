@@ -5,6 +5,8 @@ import shutil
 import subprocess
 import unittest
 
+EXPECTED_PROXY_VERSION="0.1.0"
+
 
 class CompletionProxyScriptTests(unittest.TestCase):
     def __init__(self, methodName):
@@ -33,7 +35,7 @@ class CompletionProxyScriptTests(unittest.TestCase):
 
         version_script_invocation_details = self.get_version_script_invocation_details()
 
-        self.assertEqual(version_script_invocation_details["proxy_version"], "0.1.0")
+        self.assertEqual(version_script_invocation_details["proxy_version"], EXPECTED_PROXY_VERSION)
         self.assertEqual(version_script_invocation_details["register_as"], "batect-1.0.0")
         self.assertEqual(version_script_invocation_details["arguments"], "--generate-completion-script=fish")
 
