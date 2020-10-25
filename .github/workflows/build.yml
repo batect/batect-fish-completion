@@ -35,4 +35,4 @@ jobs:
 
       - name: Validate release
         run: ./batect validate-release
-        if: github.event_name == 'push' && contains(github.ref, 'refs/tags/') && github.repository == 'batect/batect'
+        if: github.event_name == 'push' && contains(github.ref, 'refs/tags/') && github.repository == 'batect/fish-completion'
