@@ -75,6 +75,14 @@ tasks:
       command: ./tests.py
       working_directory: /tests
 
+  test-shell:
+    description: Start a Fish shell in the test environment.
+    group: Utility tasks
+    run:
+      container: test-env
+      command: fish
+      working_directory: /tests
+
 include:
   - type: git
     repo: https://github.com/batect/hadolint-bundle.git
