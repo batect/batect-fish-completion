@@ -7,9 +7,9 @@ ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 
 function main() {
     VERSION_IN_SCRIPT=$(getVersionInScript)
-    GIT_TAG=$(getGitTag)
-
     echo "Version in script: $VERSION_IN_SCRIPT"
+
+    GIT_TAG=$(getGitTag)
     echo "Git tag: $GIT_TAG"
 
     if [ "$VERSION_IN_SCRIPT" == "$GIT_TAG" ]; then
