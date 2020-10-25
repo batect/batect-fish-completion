@@ -72,6 +72,10 @@ class CompletionProxyScriptTests(unittest.TestCase):
         result = self.run_completions_for("./batect dum", self.directory_for_test_case("incompatible-version"))
         self.assertEqual(result, ["dummy-file"])
 
+    def test_no_version_in_wrapper(self):
+        result = self.run_completions_for("./batect --", self.directory_for_test_case("gradle-generated-start-script"))
+        self.assertEqual(result, ["--do-thing", "--other-thing", "--third-thing"])
+
     def run_completions_for(self, input, working_directory):
         stdout = self.run_fish_command('complete -C"{}"'.format(input), working_directory)
 
