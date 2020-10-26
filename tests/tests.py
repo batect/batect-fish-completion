@@ -27,7 +27,7 @@ class CompletionProxyScriptTests(unittest.TestCase):
 
     def test_directory_with_wrapper(self):
         result = self.run_completions_for("./bat", self.directory_for_test_case("version-1"))
-        self.assertEqual(result, ["./batect\tExecutable, 618B"])
+        self.assertEqual(result, ["./batect\tExecutable, 666B"])
 
     def test_complete_arguments(self):
         result = self.run_completions_for("./batect --", self.directory_for_test_case("version-1"))
@@ -37,6 +37,7 @@ class CompletionProxyScriptTests(unittest.TestCase):
 
         self.assertEqual(version_script_invocation_details["proxy_version"], EXPECTED_PROXY_VERSION)
         self.assertEqual(version_script_invocation_details["register_as"], "batect-1.0.0")
+        self.assertEqual(version_script_invocation_details["wrapper_quiet_download"], "true")
         self.assertEqual(version_script_invocation_details["arguments"], "--generate-completion-script=fish")
 
     def test_complete_filtering_arguments(self):
@@ -133,7 +134,8 @@ class CompletionProxyScriptTests(unittest.TestCase):
             return {
                 "proxy_version": content[0].split("BATECT_COMPLETION_PROXY_VERSION is ")[1].strip(),
                 "register_as": content[1].split("BATECT_COMPLETION_PROXY_REGISTER_AS is ")[1].strip(),
-                "arguments": content[2].split("Arguments were: ")[1].strip()
+                "wrapper_quiet_download": content[2].split("BATECT_QUIET_DOWNLOAD is ")[1].strip(),
+                "arguments": content[3].split("Arguments were: ")[1].strip()
             }
 
     def assert_single_version_script_invocation(self):

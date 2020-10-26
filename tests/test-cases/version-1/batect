@@ -10,6 +10,7 @@ invocation_time=$(date -u +"%Y-%m-%dT%H:%M:%S%Z")
 cat <<EOF > "/tmp/batect-fish-completion-tests/$invocation_time.txt"
 BATECT_COMPLETION_PROXY_VERSION is $BATECT_COMPLETION_PROXY_VERSION
 BATECT_COMPLETION_PROXY_REGISTER_AS is $BATECT_COMPLETION_PROXY_REGISTER_AS
+BATECT_QUIET_DOWNLOAD is $BATECT_QUIET_DOWNLOAD
 Arguments were: $@
 EOF
 
