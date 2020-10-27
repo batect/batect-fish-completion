@@ -3,11 +3,12 @@ set __fish_batect_proxy_loaded_versions
 function __fish_batect_proxy_complete_for_current_version
     set -l tokens (commandline -opc) (commandline -ct)
     set -l wrapper_script_path $tokens[1]
-    set -e tokens[1]
+    set -l cut_command_line_at (math (string length "$wrapper_script_path") + 2)
+    set -l command_line_without_wrapper (string sub --start $cut_command_line_at (commandline -bc))
 
     if test ! -x $wrapper_script_path
         # If the wrapper script doesn't exist, fallback to as if this completion script doesn't exist.
-        complete -C"batect-completion-proxy-nonsense $tokens"
+        complete -C"batect-completion-proxy-nonsense $command_line_without_wrapper"
         return
     end
 
@@ -19,7 +20,7 @@ function __fish_batect_proxy_complete_for_current_version
 
         if test \( $batect_version_major -eq 0 \) -a \( $batect_version_minor -lt 62 \)
             # If we know what the version is, and it's too old, fallback to as if this completion script doesn't exist.
-            complete -C"batect-completion-proxy-nonsense $tokens"
+            complete -C"batect-completion-proxy-nonsense $command_line_without_wrapper"
             return
         end
     else
@@ -37,7 +38,7 @@ function __fish_batect_proxy_complete_for_current_version
         set -a __fish_batect_proxy_loaded_versions $batect_version
     end
 
-    complete -C"$BATECT_COMPLETION_PROXY_REGISTER_AS $tokens"
+    complete -C"$BATECT_COMPLETION_PROXY_REGISTER_AS $command_line_without_wrapper"
 end
 
 complete -c batect -x -a "(__fish_batect_proxy_complete_for_current_version)"
