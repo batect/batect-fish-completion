@@ -29,6 +29,7 @@ function __fish_batect_proxy_complete_for_current_version
 
     set -lx BATECT_COMPLETION_PROXY_REGISTER_AS "batect-$batect_version"
     set -lx BATECT_COMPLETION_PROXY_VERSION "0.3.0-dev"
+    set -lx BATECT_COMPLETION_PROXY_WRAPPER_PATH $wrapper_script_path
 
     if not contains $batect_version $__fish_batect_proxy_loaded_versions
         set completion_script (BATECT_QUIET_DOWNLOAD=true $wrapper_script_path --generate-completion-script=fish | string collect)

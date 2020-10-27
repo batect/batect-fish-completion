@@ -18,4 +18,5 @@ cat <<EOF
 complete -c "$BATECT_COMPLETION_PROXY_REGISTER_AS" -l do-thing
 complete -c "$BATECT_COMPLETION_PROXY_REGISTER_AS" -l other-thing
 complete -c "$BATECT_COMPLETION_PROXY_REGISTER_AS" -l third-thing
+complete -c "$BATECT_COMPLETION_PROXY_REGISTER_AS" -l wrapper-script-path --no-files --require-parameter -a '(echo path-\$BATECT_COMPLETION_PROXY_WRAPPER_PATH-path)'
 EOF

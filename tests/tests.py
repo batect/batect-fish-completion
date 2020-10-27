@@ -30,12 +30,15 @@ class CompletionProxyScriptTests(unittest.TestCase):
         self.assertEqual(result, [])
 
     def test_directory_with_wrapper(self):
-        result = self.run_completions_for("./bat", self.directory_for_test_case("version-1"))
-        self.assertEqual(result, ["./batect\tExecutable, 666B"])
+        directory_for_test_case = self.directory_for_test_case("version-1")
+        result = self.run_completions_for("./bat", directory_for_test_case)
+
+        file_size = os.path.getsize(os.path.join(directory_for_test_case, "batect"))
+        self.assertEqual(result, ["./batect\tExecutable, {}B".format(file_size)])
 
     def test_complete_arguments(self):
         result = self.run_completions_for("./batect --", self.directory_for_test_case("version-1"))
-        self.assertEqual(result, ["--do-thing", "--other-thing", "--third-thing"])
+        self.assertEqual(result, ["--do-thing", "--other-thing", "--third-thing", "--wrapper-script-path"])
 
         version_script_invocation_details = self.get_version_script_invocation_details()
 
@@ -43,6 +46,10 @@ class CompletionProxyScriptTests(unittest.TestCase):
         self.assertEqual(version_script_invocation_details["register_as"], "batect-1.0.0")
         self.assertEqual(version_script_invocation_details["wrapper_quiet_download"], "true")
         self.assertEqual(version_script_invocation_details["arguments"], "--generate-completion-script=fish")
+
+    def test_passing_wrapper_script_path(self):
+        result = self.run_completions_for("./batect --wrapper-script-path=", self.directory_for_test_case("version-1"))
+        self.assertEqual(result, ["--wrapper-script-path=path-./batect-path"])
 
     def test_complete_filtering_arguments(self):
         result = self.run_completions_for("./batect --do", self.directory_for_test_case("version-1"))
@@ -54,8 +61,8 @@ class CompletionProxyScriptTests(unittest.TestCase):
 
     def test_multiple_invocations_same_version(self):
         result = self.run_two_completions("./batect --", "./batect --", self.directory_for_test_case("version-1"))
-        self.assertEqual(result["first"], ["--do-thing", "--other-thing", "--third-thing"])
-        self.assertEqual(result["second"], ["--do-thing", "--other-thing", "--third-thing"])
+        self.assertEqual(result["first"], ["--do-thing", "--other-thing", "--third-thing", "--wrapper-script-path"])
+        self.assertEqual(result["second"], ["--do-thing", "--other-thing", "--third-thing", "--wrapper-script-path"])
         self.assert_single_version_script_invocation()
 
     def test_multiple_invocations_different_version(self):
@@ -66,7 +73,7 @@ class CompletionProxyScriptTests(unittest.TestCase):
             self.directory_for_test_case("version-2"),
         )
 
-        self.assertEqual(result["first"], ["--do-thing", "--other-thing", "--third-thing"])
+        self.assertEqual(result["first"], ["--do-thing", "--other-thing", "--third-thing", "--wrapper-script-path"])
         self.assertEqual(result["second"], ["--other-second-thing", "--second-thing"])
 
     def test_not_in_current_directory(self):
