@@ -5,6 +5,12 @@ function __fish_batect_proxy_complete_for_current_version
     set -l wrapper_script_path $tokens[1]
     set -e tokens[1]
 
+    if test ! -x $wrapper_script_path
+        # If the wrapper script doesn't exist, fallback to as if this completion script doesn't exist.
+        complete -C"batect-completion-proxy-nonsense $tokens"
+        return
+    end
+
     set -l batect_version (cat $wrapper_script_path | string match --regex 'VERSION="(.*)"' | awk 'NR == 2')
 
     if test "$batect_version" != ""
