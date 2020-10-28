@@ -6,8 +6,8 @@ Shell tab completions for [fish](https://fishshell.com/).
 
 ## Requirements
 
-* batect v0.62 or later
-* fish v3.2 or later
+* [batect](https://batect.dev) v0.62 or later in your project
+* [fish](https://fishshell.com/) v3.2 or later
 
 ## Installing
 
