@@ -21,7 +21,7 @@ Coming soon...
 fisher add batect/fish-completion
 ```
 
-Note that this installs the most recent commit, which may be unstable. To install a particular version, use `fisher add batect/fish-completion@<version>`,
+:warning: This installs the most recent commit, which may be unstable. To install a particular version, use `fisher add batect/fish-completion@<version>`,
 eg. `fisher add batect/fish-completion@1.2.3`.
 
 ## How this works
