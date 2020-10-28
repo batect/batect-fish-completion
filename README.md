@@ -11,9 +11,11 @@ Shell tab completions for [fish](https://fishshell.com/).
 
 ## Installing
 
-### With Homebrew
+### With [Homebrew](http://brew.sh/)
 
-Coming soon...
+```
+brew install batect/batect/batect-fish-completion
+```
 
 ### With [Fisher](https://github.com/jorgebucaran/fisher)
 
