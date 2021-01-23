@@ -4,7 +4,7 @@ function __fish_batect_proxy_complete_for_current_version
     set -l tokens (commandline -opc) (commandline -ct)
     set -l wrapper_script_path $tokens[1]
     set -l cut_command_line_at (math (string length "$wrapper_script_path") + 2)
-    set -l command_line_without_wrapper (string sub --start $cut_command_line_at (commandline -bc))
+    set -l command_line_without_wrapper (string sub --start $cut_command_line_at (commandline -pc))
 
     if test ! -x $wrapper_script_path
         # If the wrapper script doesn't exist, fallback to as if this completion script doesn't exist.
