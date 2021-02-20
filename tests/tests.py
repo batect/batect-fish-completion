@@ -21,6 +21,11 @@ class CompletionProxyScriptTests(unittest.TestCase):
 
         os.makedirs(self.test_output_root_directory)
 
+        cache_dir = os.path.expanduser("~/.batect")
+
+        if os.path.exists(cache_dir):
+            shutil.rmtree(cache_dir)
+
     def test_directory_with_no_wrapper(self):
         result = self.run_completions_for("./bat", self.directory_for_test_case("no-wrapper"))
         self.assertEqual(result, ["./bat-script\tExecutable, 20B"])
@@ -66,10 +71,16 @@ class CompletionProxyScriptTests(unittest.TestCase):
         result = self.run_completions_for("./batect --do-thing --third", self.directory_for_test_case("version-1"))
         self.assertEqual(result, ["--third-thing"])
 
-    def test_multiple_invocations_same_version(self):
+    def test_multiple_invocations_same_version_same_session(self):
         result = self.run_two_completions("./batect --", "./batect --", self.directory_for_test_case("version-1"))
         self.assertEqual(result["first"], ["--do-thing", "--other-thing", "--third-thing", "--wrapper-script-path"])
         self.assertEqual(result["second"], ["--do-thing", "--other-thing", "--third-thing", "--wrapper-script-path"])
+        self.assert_single_version_script_invocation()
+
+    def test_multiple_invocations_same_version_different_sessions(self):
+        first_result = self.run_completions_for("./batect --", self.directory_for_test_case("version-1"))
+        second_result = self.run_completions_for("./batect --", self.directory_for_test_case("version-1"))
+        self.assertEqual(first_result, second_result)
         self.assert_single_version_script_invocation()
 
     def test_multiple_invocations_different_version(self):
