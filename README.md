@@ -1,6 +1,6 @@
-# batect/fish-completion
+# batect-fish-completion
 
-[![Pipeline](https://github.com/batect/fish-completion/workflows/Pipeline/badge.svg?branch=master)](https://github.com/batect/fish-completion/actions?query=workflow%3APipeline+branch%3Amaster)
+[![Pipeline](https://github.com/batect/batect-fish-completion/workflows/Pipeline/badge.svg?branch=master)](https://github.com/batect/batect-fish-completion/actions?query=workflow%3APipeline+branch%3Amaster)
 
 Shell tab completions for [fish](https://fishshell.com/).
 
@@ -20,11 +20,11 @@ brew install batect/batect/batect-fish-completion
 ### With [Fisher](https://github.com/jorgebucaran/fisher)
 
 ```shell
-fisher add batect/fish-completion
+fisher add batect/batect-fish-completion
 ```
 
-:warning: This installs the most recent commit, which may be unstable. To install a particular version, use `fisher add batect/fish-completion@<version>`,
-eg. `fisher add batect/fish-completion@1.2.3`.
+:warning: This installs the most recent commit, which may be unstable. To install a particular version, use `fisher add batect/batect-fish-completion@<version>`,
+eg. `fisher add batect/batect-fish-completion@1.2.3`.
 
 ## How this works
 
