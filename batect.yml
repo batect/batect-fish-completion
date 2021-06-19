@@ -27,7 +27,7 @@ containers:
     build_directory: .batect/test-env
     volumes:
       - local: completions/batect.fish
-        container: /usr/local/share/fish/vendor_completions.d/batect.fish
+        container: /usr/share/fish/vendor_completions.d/batect.fish
         options: ro
       - local: tests
         container: /tests
