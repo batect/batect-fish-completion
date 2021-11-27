@@ -4,4 +4,4 @@ RUN apk --no-cache add \
     bash==5.1.8-r0 \
     fish==3.3.1-r1 \
     python3==3.9.7-r4 \
-    util-linux==2.37.2-r0 # For uuidgen
+    util-linux==2.37.2-r1 # For uuidgen
