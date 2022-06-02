@@ -29,7 +29,7 @@ class CompletionProxyScriptTests(unittest.TestCase):
 
     def test_directory_with_no_wrapper(self):
         result = self.run_completions_for("./bat", self.directory_for_test_case("no-wrapper"))
-        self.assertEqual(result, ["./bat-script\tExecutable, 20B"])
+        self.assertEqual(result, ["./bat-script\tcommand"])
 
     def test_non_existent_wrapper(self):
         result = self.run_completions_for("./batect -", self.directory_for_test_case("no-wrapper"))
@@ -40,7 +40,7 @@ class CompletionProxyScriptTests(unittest.TestCase):
         result = self.run_completions_for("./bat", directory_for_test_case)
 
         file_size = os.path.getsize(os.path.join(directory_for_test_case, "batect"))
-        self.assertEqual(result, ["./batect\tExecutable, {}B".format(file_size)])
+        self.assertEqual(result, ["./batect\tcommand"])
 
     def test_complete_arguments(self):
         result = self.run_completions_for("./batect --", self.directory_for_test_case("version-1"))
