@@ -20,11 +20,11 @@ brew install batect/batect/batect-fish-completion
 ### With [Fisher](https://github.com/jorgebucaran/fisher)
 
 ```shell
-fisher add batect/batect-fish-completion
+fisher install batect/batect-fish-completion
 ```
 
-:warning: This installs the most recent commit, which may be unstable. To install a particular version, use `fisher add batect/batect-fish-completion@<version>`,
-eg. `fisher add batect/batect-fish-completion@1.2.3`.
+:warning: This installs the most recent commit, which may be unstable. To install a particular version, use `fisher install batect/batect-fish-completion@<version>`,
+eg. `fisher install batect/batect-fish-completion@1.2.3`.
 
 ## How this works
 
