@@ -26,6 +26,14 @@ fisher add batect/batect-fish-completion
 :warning: This installs the most recent commit, which may be unstable. To install a particular version, use `fisher add batect/batect-fish-completion@<version>`,
 eg. `fisher add batect/batect-fish-completion@1.2.3`.
 
+If you are running Fish v3.6 or later, additional setup is required after installing the completion script with Fisher.
+https://github.com/fish-shell/fish-shell/issues/9133, first included in Fish v3.6, disables auto-loading of completion scripts for commands not on `PATH`.
+To resolve this, you need to source the completion script manually. For example, add the following to your `~/.config/fish/config.fish`:
+
+```fish
+source ~/.config/fish/completions/batect.fish
+```
+
 ## How this works
 
 In order to enable multiple projects to co-exist with different versions of Batect (and corresponding different available options), the completion script
