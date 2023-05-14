@@ -5,7 +5,7 @@ import shutil
 import subprocess
 import unittest
 
-EXPECTED_PROXY_VERSION = "0.6.0-dev"
+EXPECTED_PROXY_VERSION = "0.5.1"
 
 
 class CompletionProxyScriptTests(unittest.TestCase):
