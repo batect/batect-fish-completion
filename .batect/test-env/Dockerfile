@@ -4,6 +4,6 @@ RUN apk --no-cache add \
     bash==5.2.15-r5 \
     fish==3.6.1-r2 \
     python3==3.11.3-r11 \
-    util-linux==2.38.1-r7 # For uuidgen
+    util-linux==2.38.1-r8 # For uuidgen
 
 COPY load_batect_completion.fish /usr/share/fish/vendor_conf.d
